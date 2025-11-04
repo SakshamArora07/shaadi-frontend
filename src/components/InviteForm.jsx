@@ -20,14 +20,16 @@ const handleSubmit = async (e) => {
   try {
     console.log("Submitting form data:", form);
     // Use your computer's IP address
-    const res = await axios.post("http://192.168.1.47:5000/api/guests", {
-      ...form,
-      attending: form.attending === "yes",
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/guests`, {
+  ...form,
+  attending: form.attending === "yes",
+}, {
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+
+
     
     console.log("Server response:", res.data);
     localStorage.setItem("weddingGuest", JSON.stringify(res.data.guest));
